@@ -1,0 +1,79 @@
+# ========================================
+# UNITY
+# ========================================
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+obj/
+MemoryCaptures/
+*.booproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.csproj
+*.unityproj
+*.tmproj
+*.log
+*.apk
+*.aab
+*.unitypackage
+*.swp
+*.swo
+*.swn
+*.tmp
+.DS_Store
+.vscode/
+.idea/
+*.db
+*.opendb
+
+# Auto-generated VS/JetBrains files
+.vs/
+.vscode/
+*.code-workspace
+
+# Crash & Debug
+sysinfo.txt
+
+# ========================================
+# ENVIRONMENTS & SECRETS
+# ========================================
+.env
+*.env
+.env.*
+
+# Python (por si usas entorno virtual para el servidor Flask)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.coverage
+.cache/
+.pytest_cache/
+*.log
+*.sqlite3
+*.db
+*.tgz
+*.tar.gz
+venv/
+.venv/
+
+# ========================================
+# FLASK SERVER
+# ========================================
+flask-server/__pycache__/
+flask-server/.env
+
+# ========================================
+# PERSONAL ASSETS (EXCLUYENDO 3D_assets)
+# ========================================
+**/3D_Assets/
+
+# ========================================
+# GIT
+# ========================================
+!.gitignore
