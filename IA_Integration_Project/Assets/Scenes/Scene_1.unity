@@ -476,7 +476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &145785439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +864,7 @@ MonoBehaviour:
   sendButton: {fileID: 1007197834}
   movementScript: {fileID: 30215386}
   interactionPromptText: {fileID: 1006726778}
-  npcName: Guardia
+  npcName: Thoron
   triggerDistance: 2
 --- !u!136 &538149661
 CapsuleCollider:
@@ -889,6 +889,19 @@ CapsuleCollider:
   m_Height: 2.51
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &538149664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538149657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75dd9b6043800bd43966d7e9ae58e502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Thoron
 --- !u!1 &688241541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1267,50 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1143006926}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &898942040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 898942042}
+  - component: {fileID: 898942041}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &898942041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898942040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd133f34025ec0f45b3cad8b6d094e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &898942042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898942040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.478092, y: 3.12817, z: 70.276436}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &959567912
@@ -1674,7 +1731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       propertyPath: m_Name
-      value: NPC_Lyra
+      value: NPC_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1710,7 +1767,7 @@ MonoBehaviour:
   sendButton: {fileID: 1007197834}
   movementScript: {fileID: 30215386}
   interactionPromptText: {fileID: 1006726778}
-  npcName: Sabio3
+  npcName: Kaelis
   triggerDistance: 3
 --- !u!114 &1016350979
 MonoBehaviour:
@@ -1724,8 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dd9b6043800bd43966d7e9ae58e502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Sabio3
-  roleDescription: Tercer sabio
+  npcName: Kaelis
 --- !u!1 &1143006923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       propertyPath: m_Name
-      value: NPC_Bronn
+      value: NPC_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2427,7 +2483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       propertyPath: m_Name
-      value: NPC_Trinity
+      value: NPC_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2463,7 +2519,7 @@ MonoBehaviour:
   sendButton: {fileID: 1007197834}
   movementScript: {fileID: 30215386}
   interactionPromptText: {fileID: 1006726778}
-  npcName: Sabio2
+  npcName: Myrren
   triggerDistance: 3
 --- !u!114 &1330025229
 MonoBehaviour:
@@ -2477,8 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dd9b6043800bd43966d7e9ae58e502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Sabio2
-  roleDescription: Segundo sabio
+  npcName: Myrren
 --- !u!1 &1366612302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,6 +2768,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 538149658}
+    - targetCorrespondingSourceObject: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 538149664}
     - targetCorrespondingSourceObject: {fileID: 6792327054025522797, guid: 64db8d48fab1ceb43a8ee5d52643029a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 538149661}
@@ -3532,7 +3590,7 @@ MonoBehaviour:
   sendButton: {fileID: 1007197834}
   movementScript: {fileID: 30215386}
   interactionPromptText: {fileID: 1006726778}
-  npcName: Sabio1
+  npcName: Alerion
   triggerDistance: 3
 --- !u!114 &1897371978
 MonoBehaviour:
@@ -3546,8 +3604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dd9b6043800bd43966d7e9ae58e502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Sabio1
-  roleDescription: Primer sabio
+  npcName: Alerion
 --- !u!1 &1906367006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3872,3 +3929,4 @@ SceneRoots:
   - {fileID: 1016350974}
   - {fileID: 1386294188}
   - {fileID: 145785440}
+  - {fileID: 898942042}

@@ -13,9 +13,6 @@ public class DialogueTrigger : MonoBehaviour
     public MonoBehaviour movementScript;
     public GameObject interactionPromptText; // Objeto UI compartido (Dialogue_Activator)
 
-    [Header("NPC Info")]
-    public string npcName = "Trinity";
-
     [Header("Settings")]
     public float triggerDistance = 3f;
 
@@ -25,6 +22,7 @@ public class DialogueTrigger : MonoBehaviour
     private ChatMessage chatMessage;
     private BillboardFollower billboardFollower;
     private TMP_Text promptLabel;
+    private NPCIdentity npcIdentity;
 
     void Start()
     {
@@ -40,6 +38,10 @@ public class DialogueTrigger : MonoBehaviour
             billboardFollower = interactionPromptText.GetComponent<BillboardFollower>();
             promptLabel = interactionPromptText.GetComponentInChildren<TMP_Text>();
         }
+
+        npcIdentity = GetComponent<NPCIdentity>();
+        if (npcIdentity == null)
+            Debug.LogWarning("No se encontró NPCIdentity en " + gameObject.name);
     }
 
     void Update()
@@ -96,12 +98,11 @@ public class DialogueTrigger : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (chatMessage != null)
+        if (chatMessage != null && npcIdentity != null)
         {
-            chatMessage.SetCurrentNPC(npcName);
+            chatMessage.SetCurrentNPC(npcIdentity.npcName);
         }
     }
-
 
     void DeactivateDialogue()
     {
@@ -124,7 +125,7 @@ public class DialogueTrigger : MonoBehaviour
             billboardFollower.SetTarget(transform);
 
         if (promptLabel != null && show)
-            promptLabel.text = $"Pulsa T para hablar con {npcName}";
+            promptLabel.text = $"Pulsa T para hablar con {npcIdentity?.npcName ?? "NPC"}";
     }
 
     bool AllReferencesAssigned()
@@ -134,6 +135,7 @@ public class DialogueTrigger : MonoBehaviour
                inputField != null &&
                sendButton != null &&
                movementScript != null &&
-               interactionPromptText != null;
+               interactionPromptText != null &&
+               npcIdentity != null;
     }
 }
