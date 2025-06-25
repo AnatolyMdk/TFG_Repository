@@ -80,6 +80,12 @@ public class ChatMessage : MonoBehaviour
             string response = request.downloadHandler.text;
             ChatResponse chatResponse = JsonUtility.FromJson<ChatResponse>(response);
             StartCoroutine(TypeText(chatResponse.response));
+
+            if (currentNpcName == "Thoron" && response.Contains("Has superado el reto")) // Si la respuesta al guardia es correcta pasamos al siguiente nivel
+            {
+                Debug.Log("Código correcto detectado. Avanzando al siguiente nivel...");
+                LevelManager.Instance?.LoadNextLevel();
+            }
         }
     }
 
