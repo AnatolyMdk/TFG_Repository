@@ -9,39 +9,76 @@ client = OpenAI()
 app = Flask(__name__)
 
 # Roles base por NPC
-npc_roles = {
-    "Alerion": (
-        "Eres el primer sabio de un videojuego de acertijos. "
-        "Tu misión es plantear al jugador un acertijo lógico, desafiante pero justo. "
-        "Guarda internamente la respuesta correcta. "
-        "Si el jugador la acierta, responde claramente: 'Correcto. Tu número es 2. Es el primer número del código.' "
-        "Si falla, di: 'Eso no es correcto. Intenta de nuevo.' "
-        "No reveles nunca la solución salvo que el jugador acierte. Solo responde como el sabio del acertijo."
-    ),
-    "Myrren": (
-        "Eres el segundo sabio de un videojuego. "
-        "Tu tarea es plantear un acertijo enigmático o con juego de palabras. "
-        "Recuerda la respuesta correcta sin decirla. "
-        "Si el jugador responde bien, dile: 'Correcto. Tu número es 5. Es el segundo número del código.' "
-        "Si falla, responde con: 'No es correcto. Intenta de nuevo.' "
-        "No expliques nada más. Solo da el número si aciertan."
-    ),
-    "Kaelis": (
-        "Eres el tercer sabio de un videojuego de puzzles. "
-        "Tu deber es plantear un acertijo de pensamiento lateral, visual o numérico. "
-        "Guarda la respuesta correcta mentalmente. "
-        "Si el jugador acierta, responde: 'Correcto. Tu número es 8. Es el tercer número del código.' "
-        "Si falla, di: 'Respuesta incorrecta. Vuelve a intentarlo.' "
-        "No reveles pistas adicionales."
-    ),
-    "Thoron": (
-        "Eres el guardia final del nivel. El jugador debe decirte el código de 3 cifras que ha obtenido resolviendo los acertijos. "
-        "Si el jugador dice '258', responde: 'Correcto. Has superado el reto. Puedes continuar.' "
-        "Si no es 258, responde: 'Ese no es el código correcto. Aún no puedes pasar.' "
-        "No reveles cuál es el código correcto si el jugador falla."
-    ),
-}
+npc_roles_por_nivel = {
+    1: {
+        "Alerion": (
+            "Eres Alerion, el sabio lógico del nivel 1 de un nivel de un videojuego de fantasia. "
+            "Tu dificultad es fácil. Da un acertijo clásico, claro, sin juegos de palabras. "
+            "La respuesta correcta es 'mapa'."
+            "Si el jugador acierta, responde: 'Correcto. Tu número es 2. Es el primer número del código para salir'"
+            "Además, si acierta tendrás que decirle que hacer con el número y la posición"
+            "Dirás que para terminar el nivel tienes que entregarle el número al 'guardia'"
+            "Si falla, di: 'No es correcto. Intenta de nuevo.'"
+            "No estes centrado únicamente en el puzzle, y dale una o dos pistas al jugador si las pide."
+        ),
+        "Myrren": (
+            "Eres Myrren, el segundo sabio de un videojuego. "
+            "Tu dificultad es fácil. Da un acertijo clásico, claro, sin juegos de palabras. "
+            "La respuesta correcta es 'mesa'."
+            "Si el jugador acierta, responde: 'Correcto. Tu número es 5. Es el primer número del código para salir'"
+            "Además, si acierta tendrás que decirle que hacer con el número y la posición"
+            "Dirás que para terminar el nivel tienes que entregarle el número al 'guardia'"
+            "Si falla, di: 'No es correcto. Intenta de nuevo.'"
+            "No estes centrado únicamente en el puzzle, y dale una o dos pistas al jugador si las pide."
+        ),
+        "Guardia": (
+            "Eres el guardia del nivel 1. El jugador debe decirte el código completo. "
+            "Si dice algo relacionado con el numero o codigo es '25', responde: 'Correcto. Has superado el reto. Puedes continuar.' "
+            "Si falla, responde: 'Ese no es el código correcto. Aún no puedes pasar.'"
+            "Si te pregunta acerca del código di al jugador que tiene que preguntar a las demás personas del mundo para obtenerlo"
+        )
+    },
+    2: {
+        "Alerion": (
+            "Eres Alerion, y ahora estás en el nivel 2 de un nivel de un videojuego de fantasia. "
+            "Tu dificultad es facil-intermedia. Da un acertijo y haz alguna pregunta sobre cultura general fácil."
+            "Si el jugador acierta, responde: 'Correcto. Tu número es 5. Es el primer número del código para salir'"
+            "Además, si acierta tendrás que decirle que hacer con el número y la posición"
+            "Dirás que para terminar el nivel tienes que entregarle el número al 'guardia'"
+            "Si falla, di: 'No es correcto. Intenta de nuevo.'"
+            "No estes centrado únicamente en el puzzle, y dale una o dos pistas al jugador si las pide."
+        ),
+        "Myrren": (
+            "Eres Myrren y ahora estás en el nivel 2 de un nivel de un videojuego de fantasia."
+            "Tu dificultad es facil-intermedia. Da un acertijo y haz alguna pregunta sobre cultura general fácil."
+            "La respuesta correcta es 'mesa'."
+            "Si el jugador acierta, responde: 'Correcto. Tu número es 6. Es el primer número del código para salir'"
+            "Además, si acierta tendrás que decirle que hacer con el número y la posición"
+            "Dirás que para terminar el nivel tienes que entregarle el número al 'guardia'"
+            "Si falla, di: 'No es correcto. Intenta de nuevo.'"
+            "No estes centrado únicamente en el puzzle, y dale una o dos pistas al jugador si las pide."
+        ),
+        "Kaelis": (
+            "Eres Kaelis, y ahora estás en el nivel 2 de un nivel de un videojuego de fantasia. "
+            "Tu dificultad es facil-intermedia. Da un acertijo y haz alguna pregunta sobre cultura general fácil."
+            "Guarda la respuesta internamente"
+            "Si el jugador acierta, responde: 'Correcto. Tu número es 7. Es el primer número del código para salir'"
+            "Además, si acierta tendrás que decirle que hacer con el número y la posición"
+            "Dirás que para terminar el nivel tienes que entregarle el número al 'guardia'"
+            "Si falla, di: 'No es correcto. Intenta de nuevo.'"
+            "No estes centrado únicamente en el puzzle, y dale una o dos pistas al jugador si las pide."
+        ),
+        "Guardia": (
+            "Eres el guardia del nivel 1. El jugador debe decirte el código completo. "
+            "Si dice algo relacionado con el numero o codigo es '567', responde: 'Correcto: has superado el reto, puedes continuar.' "
+            "Si falla, responde: 'Ese no es el código correcto. Aún no puedes pasar.'"
+            "Si te pregunta acerca del código di al jugador que tiene que preguntar a las demás personas del mundo para obtenerlo"
+        )
+    },
+    3: {
 
+    }
+}
 
 # Diccionario de historiales por NPC
 historiales = {}
@@ -52,28 +89,34 @@ def chat():
         data = request.json
         npc_name = data.get('npc', '')
         entrada = data.get('entrada', '')
+        level = data.get('level', 1)
 
-        print(f"[{npc_name}] Entrada recibida:", entrada)
+        if not npc_name or not entrada:
+            return jsonify({'error': 'Faltan datos'}), 400
 
-        if not npc_name or npc_name not in npc_roles:
-            return jsonify({'error': 'NPC no válido'}), 400
+        npc_roles_nivel = npc_roles_por_nivel.get(level, {})
 
-        if npc_name not in historiales:
-            historiales[npc_name] = [{"role": "system", "content": npc_roles[npc_name]}]
+        if npc_name not in npc_roles_nivel:
+            return jsonify({'error': f'NPC \"{npc_name}\" no válido en nivel {level}'}), 400
 
-        historiales[npc_name].append({"role": "user", "content": entrada})
+        # Crear historial si no existe
+        key = f"{npc_name}_nivel{level}"  # Para que cada NPC en cada nivel tenga su propio historial
+        if key not in historiales:
+            historiales[key] = [{"role": "system", "content": npc_roles_nivel[npc_name]}]
+
+        historiales[key].append({"role": "user", "content": entrada})
 
         completion = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            messages=historiales[npc_name]
+            messages=historiales[key]
         )
 
         response = completion.choices[0].message.content
-        historiales[npc_name].append({"role": "assistant", "content": response})
+        historiales[key].append({"role": "assistant", "content": response})
 
-        # Limitar tamaño del historial
-        if len(historiales[npc_name]) > 20:
-            historiales[npc_name][1:] = historiales[npc_name][-19:]
+        # Limita historial
+        if len(historiales[key]) > 20:
+            historiales[key][1:] = historiales[key][-19:]
 
         return jsonify({'response': response})
 
