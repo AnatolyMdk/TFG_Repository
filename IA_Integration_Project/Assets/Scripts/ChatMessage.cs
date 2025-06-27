@@ -10,6 +10,7 @@ public class Message
 {
     public string npc;      // Nombre del NPC actual
     public string entrada;  // Mensaje del jugador
+    public int level;       // Nivel actual del juego
 }
 
 [System.Serializable]
@@ -57,8 +58,14 @@ public class ChatMessage : MonoBehaviour
 
     IEnumerator PostRequest(string url, string message)
     {
-        // Empaquetar datos para la API Flask
-        Message msg = new Message { npc = currentNpcName, entrada = message };
+        // 🔧 Modificación clave: se añade el nivel actual
+        Message msg = new Message
+        {
+            npc = currentNpcName,
+            entrada = message,
+            level = LevelManager.Instance != null ? LevelManager.Instance.currentLevel : 1
+        };
+
         string jsonData = JsonUtility.ToJson(msg);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
 
@@ -81,10 +88,10 @@ public class ChatMessage : MonoBehaviour
             ChatResponse chatResponse = JsonUtility.FromJson<ChatResponse>(response);
             StartCoroutine(TypeText(chatResponse.response));
 
-            if (currentNpcName == "Guardia" && response.Contains("Has superado el reto")) // Si la respuesta al guardia es correcta pasamos al siguiente nivel
+            if (currentNpcName == "Guardia" && (response.Contains("Has superado el reto") || response.Contains("has superado el reto")))
             {
-                Debug.Log("Código correcto detectado. Avanzando al siguiente nivel...");
-                LevelManager.Instance?.LoadNextLevel();
+                Debug.Log("Código correcto detectado.");
+                StartCoroutine(WaitAndLoadNextLevel());
             }
         }
     }
@@ -95,7 +102,13 @@ public class ChatMessage : MonoBehaviour
         foreach (char c in fullText)
         {
             chatText.text += c;
-            yield return new WaitForSeconds(0.01f);  // Velocidad de tipeo
+            yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    IEnumerator WaitAndLoadNextLevel()
+    {
+        yield return new WaitForSeconds(5f);
+        LevelManager.Instance?.LoadNextLevel();
     }
 }
